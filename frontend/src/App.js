@@ -1,12 +1,22 @@
-import ContactForm from "./pages/Contact";
-// import HomePage from "./pages/Homepage";
-
-function App() {
+import React from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Pages/HomePage";
+export default function App() {
   return (
-    <div className="App">
-      <ContactForm />
+    <div>
+      <Router>
+        <Header />
+        <div>
+          <Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            {/* <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/career-generator" element={<CareerGenerator />} /> */}
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
     </div>
   );
 }
-
-export default App;
