@@ -6,7 +6,6 @@ import Dashboard from "./components/DashboardComponents/Dashboard";
 import CareerGenerator from "./components/Pages/CareerGenerator";
 import "./App.css"; // Import the CSS file for styling
 import Contact from "./components/Pages/Contact";
-
 export default function App() {
   return (
     <div>

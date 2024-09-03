@@ -1,7 +1,6 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
-
 const { Header } = Layout;
 
 const Slider = () => {
