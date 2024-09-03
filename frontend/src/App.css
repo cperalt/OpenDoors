@@ -1,38 +1,24 @@
-.App {
-  text-align: center;
+.side-by-side {
+  display: flex;
+  flex: 1;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dashboard {
+  max-width: fit-content; /* Set the maximum width for the Dashboard component */
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* App.css */
+.content-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh; /* Make the container take the full height of the viewport */
 }
 
-.App-link {
-  color: #61dafb;
+.side-by-side > * {
+  flex: 1; /* Make both components take equal space */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.career-generator {
+  flex: 1; /* Make the CareerGenerator component take up the remaining space */
+  display: flex;
+  flex-direction: column;
+  overflow: auto; /* Ensure content is scrollable if it overflows */
 }
