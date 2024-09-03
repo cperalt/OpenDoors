@@ -5,7 +5,6 @@ import Home from "./components/Pages/HomePage";
 import Dashboard from "./components/DashboardComponents/Dashboard";
 import CareerGenerator from "./components/Pages/CareerGenerator";
 import "./App.css"; // Import the CSS file for styling
-import Login from "./components/Pages/Login";
 import Contact from "./components/Pages/Contact";
 
 export default function App() {
@@ -30,7 +29,6 @@ export default function App() {
               element={
                 <div className="side-by-side">
                   <Dashboard className="dashboard" />
-                  <Login />
                 </div>
               }
             />
