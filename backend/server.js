@@ -6,6 +6,7 @@ const Anthropic = require('@anthropic-ai/sdk');
 const mysql = require('mysql');
 const app = express();
 const PORT = process.env.PORT || 3000;
+const { auth } = require('express-openid-connect');
 
 // Initialize Anthropic client
 const anthropicClient = new Anthropic({
@@ -14,17 +15,54 @@ const anthropicClient = new Anthropic({
 // Middleware
 app.use(bodyParser.json());
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
+const config = {
+    authRequired: false,
+    auth0Logout: true,
+    secret: 'f9e8176571a07c94810df76cefdc5f47b1d75980a1a41fd2230288676dbe04d7',
+    baseURL: 'http://localhost:3000',
+    clientID: 'AnI7nw9nq3404W1Ul61rCbyaIp7DCEdk',
+    issuerBaseURL: 'https://dev-z406x3swdy8f8arq.us.auth0.com',
+    
+    
+    };
 
-db.connect(function (err) {
-  if (err) throw err;
-  console.log('Connected to database!');
+const { requiresAuth } = require('express-openid-connect');    
+
+    // auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+
+// const db = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+//   port: process.env.DB_PORT
+// });
+
+// db.connect(function (err) {
+//   if (err) throw err;
+//   console.log('Connected to database!');
+// });
+
+
+app.get('/logout', (req, res) => {
+    res.oidc.logout({
+      returnTo: 'http://localhost:3000', // Ensure this matches the allowed logout URL in Auth0
+      federated: true, // Optional: Logs out from the Auth0 session as well
+    });
+  });
+
+app.get('/dashboard', (req, res) => {
+    if (!req.oidc.isAuthenticated()) {
+      return res.redirect('/');
+    }
+    res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+  });
+
+
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
 
 app.post("/form", (req, res) => {
