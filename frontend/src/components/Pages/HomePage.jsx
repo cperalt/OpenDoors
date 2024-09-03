@@ -1,5 +1,4 @@
 import React from "react";
-import "../styling/Homepage.css";
 import icon1 from "../img/icon1.svg";
 import icon2 from "../img/icon2.svg";
 import icon3 from "../img/icon3.svg";
@@ -8,7 +7,7 @@ import stars from "../img/stars.svg";
 import heroimage from "../img/hero-image.jpg";
 import divider from "../img/divider.svg";
 import divider2 from "../img/divider2.svg";
-import "../styling/HomePage.css";
+import "../styling/Homepage.scss";
 const HomePage = () => {
   return (
     <div className="homepage">
