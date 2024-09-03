@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/CareerGenerator.css";
-
 const CareerGenerator = () => {
   const [highschoolyr, setHighschoolyr] = useState("");
   const [learningStyle, setLearningStyle] = useState("");
@@ -8,35 +7,45 @@ const CareerGenerator = () => {
   const [institution, setInstitution] = useState("");
   const [city, setCity] = useState("");
   const [career, setCareer] = useState(null);
-
+  const [isGenerating, setIsGenerating] = useState(false); // New state to control API call
   const generateCareer = async () => {
-    const response = await fetch("http://localhost:3000/fake-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        highschoolyr,
-        learningStyle,
-        careerAspirations,
-        institution,
-        city,
-      }),
-    });
-    const data = await response.json();
-    if (data) {
-      setCareer(data);
-    } else {
-      console.error("careerSuggestion is undefined in the response data");
+    setIsGenerating(true); // Set generating flag to true
+    try {
+      const response = await fetch("http://localhost:3030/submit-story", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          highschoolyr,
+          learningStyle,
+          careerAspirations,
+          institution,
+          city,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data) {
+        setCareer(data);
+        console.log("Career data set successfully");
+      } else {
+        console.error("careerSuggestion is undefined in the response data");
+      }
+      console.log("Returned data: ", data);
+    } catch (error) {
+      console.error("Error fetching career data:", error);
+    } finally {
+      setIsGenerating(false); // Reset generating flag after API call is complete
     }
-    console.log("returned data ", data);
-    console.log("career ", career);
   };
-
   useEffect(() => {
-    console.log("Career state updated:", career);
+    if (career !== null) {
+      console.log("Career state updated:", career);
+    }
   }, [career]);
-
   return (
     <div className="career-generator-container">
       <h1>Career Generator</h1>
@@ -70,8 +79,10 @@ const CareerGenerator = () => {
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
-      <button onClick={generateCareer}>Generate Career</button>
-      {career && (
+      <button onClick={generateCareer} disabled={isGenerating}>
+        {isGenerating ? "Generating..." : "Generate Career"}
+      </button>
+      {career && career.careerPathway && (
         <div>
           <h1>{career.careerPathway.title}</h1>
           <p>{career.careerPathway.description}</p>
@@ -145,5 +156,4 @@ const CareerGenerator = () => {
     </div>
   );
 };
-
 export default CareerGenerator;
