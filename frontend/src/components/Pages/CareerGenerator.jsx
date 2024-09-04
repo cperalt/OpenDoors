@@ -50,19 +50,34 @@ const CareerGenerator = () => {
     <div className="career-generator-container">
       <h1>Career Generator</h1>
       <label>Highschool Year</label>
-      <input
-        type="text"
-        placeholder="Grade Level"
+      <select
+        className="form-control"
+        name="highschoolyr"
         value={highschoolyr}
         onChange={(e) => setHighschoolyr(e.target.value)}
-      />
+      >
+        <option value=""></option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="graduate">Graduate</option>
+        <option value="other">Other</option>
+      </select>
       <label>Learning Style</label>
-      <input
-        type="text"
-        placeholder="Learning Style"
+      <select
+        className="form-control"
+        name="learningStyle"
         value={learningStyle}
         onChange={(e) => setLearningStyle(e.target.value)}
-      />
+      >
+        <option value=""></option>
+        <option value="auditory">Auditory</option>
+        <option value="read/write">Read/Write</option>
+        <option value="kinaesthetic">Kinaesthetic</option>
+        <option value="visual">Visual</option>
+        <option value="other">Other</option>
+      </select>
       <label>Career Aspirations</label>
       <input
         type="text"
@@ -107,7 +122,13 @@ const CareerGenerator = () => {
           <h2>Job Types</h2>
           <ul>
             {career.careerPathway.jobTypes.map((jobType, index) => (
-              <li key={index}>{jobType}</li>
+              <li
+                key={index}
+                onClick={() => generateCareer(jobType)}
+                style={{ cursor: "pointer", color: "#007bff" }}
+              >
+                {jobType}
+              </li>
             ))}
           </ul>
           <h2>Resources</h2>

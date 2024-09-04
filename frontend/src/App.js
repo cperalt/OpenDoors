@@ -6,6 +6,9 @@ import Dashboard from "./components/DashboardComponents/Dashboard";
 import CareerGenerator from "./components/Pages/CareerGenerator";
 import "./App.css"; // Import the CSS file for styling
 import Contact from "./components/Pages/Contact";
+import Profile from "./components/DashboardComponents/Profile";
+import History from "./components/DashboardComponents/History";
+import Settings from "./components/DashboardComponents/Settings";
 export default function App() {
   return (
     <div>
@@ -36,6 +39,33 @@ export default function App() {
               element={
                 <div className="side-by-side">
                   <Contact />
+                </div>
+              }
+            />
+            <Route
+              path="/dashboard-profile"
+              element={
+                <div className="side-by-side">
+                  <Dashboard className="dashboard" />
+                  <Profile />
+                </div>
+              }
+            />
+            <Route
+              path="/dashboard-history"
+              element={
+                <div className="side-by-side">
+                  <Dashboard className="dashboard" />
+                  <History />
+                </div>
+              }
+            />
+            <Route
+              path="/dashboard-settings"
+              element={
+                <div className="side-by-side">
+                  <Dashboard className="dashboard" />
+                  <Settings />
                 </div>
               }
             />
