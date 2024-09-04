@@ -2,23 +2,24 @@
   display: flex;
   flex: 1;
 }
+
 .dashboard {
-  max-width: fit-content; /* Set the maximum width for the Dashboard component */
+  max-width: fit-content; 
 }
-/* App.css */
+
 .content-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Make the container take the full height of the viewport */
+  height: 100vh; 
 }
 
 .side-by-side > * {
-  flex: 1; /* Make both components take equal space */
+  flex: 1;
 }
 
 .career-generator {
-  flex: 1; /* Make the CareerGenerator component take up the remaining space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: auto; /* Ensure content is scrollable if it overflows */
+  overflow: auto; 
 }
