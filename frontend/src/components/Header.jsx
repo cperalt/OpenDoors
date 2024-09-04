@@ -40,14 +40,14 @@ const Slider = () => {
             key: "1",
             label: "Home",
             onClick: () => {
-              navigate("/Home");
+              navigate("/");
             },
           },
           {
             key: "2",
             label: "Career Generator",
             onClick: () => {
-              navigate("/Career-Generator");
+              navigate("/CareerGenerator");
             },
           },
           {
