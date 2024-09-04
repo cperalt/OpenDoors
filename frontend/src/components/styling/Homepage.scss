@@ -1,36 +1,44 @@
 .homepage {
     
+  // position: relative;
+
     .hero-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
       background-color: #003314;
+      height: 25rem;
+      
       
 
       h1{
+        font-size: 30px;
+        font-weight: bold;
         display: flex;
         align-items: center;
-        justify-content: flex-start; 
-        padding-left: 130px;
+        justify-content: flex-end; 
+        padding-left: 100px;
         text-align: center;
         margin-bottom: 20px;
+        margin-right: 100px;
       }
 
       p{
         font-size: large;
         display: flex;
         align-items: center;
-        justify-content: flex-start; 
-        padding-left: 50px;
-        padding-right: 50px;
+        justify-content: flex-end; 
+        margin-left: 48rem;
+        margin-right: 50px;
         text-align: center;
         margin-bottom: 100px;
       }
 
       .hero-image {
-        width: 100%;
-        position: relative;
+        width: 70%;
+        height: 25rem;
+        position: absolute;
     }
 
   }
@@ -45,17 +53,24 @@
 
       .divider2{
         position: absolute;
-        top: 810px;
+        top: 800px;
         width: 1450px;
       }
     }
   
   
     .features-section {
-      padding: 40px;
+      padding-top: 60px;
+      padding-bottom: 40px;
+      margin-bottom: 50px;
       text-align: center;
       background-color: #fffdf5;
-  
+      
+      h1{
+        font-size: 30px;
+        font-weight: bold;
+      }
+
       .features {
         display: flex;
         justify-content: space-around;
@@ -75,15 +90,15 @@
       }
     }
   
-    .quiz-section {
+    .orange {
       height: 35rem;
-      padding: 40px;
+      padding-bottom: 75px;
       background-color: #ff9800;
       display: flex;
       justify-content: space-between;
       align-items: center;
   
-      .dashboard-image {
+      .phone-image {
         width: 40%;
         height: 400px;
         border-radius: 15px;
@@ -103,6 +118,11 @@
         width: 50%;
         text-align: center;
         font-size: 20px;
+
+        h1{
+          font-size: 30px;
+          font-weight: bold;
+        }
       }
 
     

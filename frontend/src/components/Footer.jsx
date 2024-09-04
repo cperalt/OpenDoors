@@ -3,38 +3,36 @@ import './CSS/Footer.css';
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="content-list">
+    <footer className="box">
+      <div className="box-list">
         <ul>
           <li><a href="/">About Us</a></li>
           <li><a href="/">Blog</a></li>
           <li><a href="/">Careers</a></li>
           <li><a href="/">Partnerships</a></li>
+          <li><a href="/">Advertise</a></li>
           <li><a href="/">Data</a></li>
           <li><a href="/">Help</a></li>
           <li><a href="/">Support</a></li>
-          <li><a href="/">Advertise</a></li>
-          <li><a href="/">Privacy Policy</a></li>
-          <li><a href="/">User Agreement</a></li>
           <li><a href="/">Web Accessibility</a></li>
-          <li><a href="/">Cookie Policy</a></li>
-          <li><a href="/">DataBase powered by</a></li>
-          <li><a href="/">Powered By Vercel</a></li>
+          <li><a href="/">Legal & Privacy</a></li>
+          <li><a href="/">Terms & Service</a></li>
+          <li><a href="/">User Agreement</a></li>
+          <li><a href="/">Cookie Setting</a></li>
+          <li><a href="/">Cookie Notice</a></li>
         </ul>
       </div>
-      <div className="content-list-links">
-        <h3>QUICK LINKS</h3>
+
+      <div className="quick-links">
+        <p>QUICK LINKS</p>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/">Career Generator</a></li>
-          <li><a href="/">Contact Us</a></li>
-          <li><a href="/">LogIn</a></li>
+          <li>Home</li>
+          <li>Career Generator</li>
+          <li>Contact Us</li>
+          <li>Log In</li>
         </ul>
-      </div>
-      <div className="footer-bottom">
-        <p>Copyright © 2024 All Rights Reserved.</p>
       </div>
     </footer>
   );
-}
+};
 
