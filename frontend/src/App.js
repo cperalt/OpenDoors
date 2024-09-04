@@ -35,7 +35,6 @@ export default function App() {
               path="/contact"
               element={
                 <div className="side-by-side">
-                  <Dashboard className="dashboard" />
                   <Contact />
                 </div>
               }
