@@ -40,21 +40,21 @@ const Slider = () => {
             key: "1",
             label: "Home",
             onClick: () => {
-              navigate("/k12");
+              navigate("/");
             },
           },
           {
             key: "2",
             label: "Career Generator",
             onClick: () => {
-              navigate("/colleges");
+              navigate("/CareerGenerator");
             },
           },
           {
             key: "3",
             label: "Contact Us",
             onClick: () => {
-              navigate("/grad-schools");
+              navigate("/Contact");
             },
           },
         ]}
