@@ -8,6 +8,7 @@ import heroimage from "../img/hero-image.jpg";
 import divider from "../img/divider.svg";
 import divider2 from "../img/divider2.svg";
 import "../styling/Homepage.scss";
+
 const HomePage = () => {
   return (
     <div className="homepage">
