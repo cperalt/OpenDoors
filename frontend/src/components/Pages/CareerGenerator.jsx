@@ -49,30 +49,35 @@ const CareerGenerator = () => {
   return (
     <div className="career-generator-container">
       <h1>Career Generator</h1>
+      <label>Highschool Year</label>
       <input
         type="text"
         placeholder="Grade Level"
         value={highschoolyr}
         onChange={(e) => setHighschoolyr(e.target.value)}
       />
+      <label>Learning Style</label>
       <input
         type="text"
         placeholder="Learning Style"
         value={learningStyle}
         onChange={(e) => setLearningStyle(e.target.value)}
       />
+      <label>Career Aspirations</label>
       <input
         type="text"
         placeholder="Career Interest"
         value={careerAspirations}
         onChange={(e) => setCareerAspirations(e.target.value)}
       />
+      <label>Institution</label>
       <input
         type="text"
         placeholder="Institutions"
         value={institution}
         onChange={(e) => setInstitution(e.target.value)}
       />
+      <label>City</label>
       <input
         type="text"
         placeholder="City"
