@@ -1,13 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout, Menu, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { SearchOutlined } from '@ant-design/icons';
-import logo from "./images/op-logo.png"
+import { useAuth0 } from "@auth0/auth0-react";
+import logo from "./images/op-logo.png";
 
 const { Header } = Layout;
 
 const Slider = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
+  useEffect(() => {
+    console.log("Auth state changed:", { isAuthenticated, user });
+  }, [isAuthenticated, user]);
+
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      logout({ returnTo: window.location.origin });
+    } else {
+      loginWithRedirect();
+    }
+  };
+
+  const menuItems = [
+    {
+      key: "1",
+      label: "Home",
+      onClick: () => navigate("/"),
+    },
+    {
+      key: "2",
+      label: "Career Generator",
+      onClick: () => navigate("/CareerGenerator"),
+    },
+    {
+      key: "3",
+      label: "Contact Us",
+      onClick: () => navigate("/Contact"),
+    },
+  ];
 
   return (
     <Header
@@ -15,9 +46,9 @@ const Slider = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 20px",  
-        backgroundColor: "#fffdf5", 
-        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" 
+        padding: "0 20px",
+        backgroundColor: "#fffdf5",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
       }}
     >
       <div className="logo" style={{ display: "flex", float: "left" }}>
@@ -36,63 +67,19 @@ const Slider = () => {
           fontSize: "16px",
           backgroundColor: "#fffdf5"
         }}
-        items={[
-          {
-            key: "1",
-            label: "Home",
-            onClick: () => {
-              navigate("/");
-            },
-          },
-          {
-            key: "2",
-            label: "Career Generator",
-            onClick: () => {
-              navigate("/CareerGenerator");
-            },
-          },
-          {
-            key: "3",
-            label: "Contact Us",
-            onClick: () => {
-              navigate("/Contact");
-            },
-          },
-        ]}
+        items={menuItems}
       />
 
       <div style={{ display: "flex", alignItems: "center" }}>
         <Button
-          icon={<SearchOutlined />}
-          type="text"
-          style={{
-            marginRight: "16px",
-            fontSize: "18px",
-            color: "#004d40",
-            border: "none",
-          }}
-        />
-        <Button
-          type="default"
-          style={{
-            marginRight: "8px",
-            borderColor: "#003314",
-            color: "#004d40",
-            backgroundColor: "#fffdf5"
-          }}
-          onClick={() => navigate("/login")}
-        >
-          Log In
-        </Button>
-        <Button
           type="primary"
+          onClick={handleAuthAction}
           style={{
             backgroundColor: "#003314",
             borderColor: "#003314",
           }}
-          onClick={() => navigate("/signup")}
         >
-          Sign Up
+          {isAuthenticated ? `Logout (${user?.name})` : "Login"}
         </Button>
       </div>
     </Header>
@@ -100,4 +87,3 @@ const Slider = () => {
 };
 
 export default Slider;
-
