@@ -13,18 +13,18 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json()); // Though express.json() is enough in most cases, this is kept for compatibility.
 
-// const db = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-//   port: process.env.DB_PORT
-// });
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
+});
 
-// db.connect(function (err) {
-//   if (err) throw err;
-//   console.log('Connected to database!');
-// });
+db.connect(function (err) {
+  if (err) throw err;
+  console.log('Connected to database!');
+});
 
 app.post("/form", (req, res) => {
   const { name, subject, email, message } = req.body;
@@ -62,7 +62,7 @@ const generateCareerPathway = async (highschoolyr, learningStyle, careerAspirati
         {
           role: 'user',
           content: `
-          You are a career advisor that will provide guidance for High School kids for their future careers. Only show 5 different pathways depending on their High School Year, and provide resources, such as links and scholarships, grants, loans, and career resources for each pathway.
+          You are a career advisor that will provide guidance for High School kids for their future careers. Only show 5 different pathways depending on their High School Year, and provide resources, such as links and scholarships, grants, loans, and career resources for each pathway. Something to keep in mind, if the answer has any bad words or inappropriate content, just say "Please be Professional and use appropriate language". Then show a link for classes in professionalism.
 
           Create a personalized career pathway for a ${highschoolyr} High School Student based on the following details:
 
@@ -125,6 +125,14 @@ const generateCareerPathway = async (highschoolyr, learningStyle, careerAspirati
                   "url": ""
                 },
                 // ... (other career resources omitted for brevity)
+              ],
+              "otherResources": [
+                {
+                  "imagepath(#)": "",
+                  "imagepath(#)": "",
+                  "imagepath(#)": "",
+                  "imagepath(#)": "",
+                },
               ]
             }
           }

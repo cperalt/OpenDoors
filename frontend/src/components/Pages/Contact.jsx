@@ -2,32 +2,68 @@ import React, { useState } from "react";
 import "../styling/Contact.scss";
 
 const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    subject: "",
-    message: "",
-  });
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here (e.g., send data to a backend)
-    console.log("Form data submitted:", formData);
-    // Clear form after submission
-    setFormData({
-      email: "",
-      name: "",
-      subject: "",
-      message: "",
-    });
+
+    if (!name || !message || !email || !subject) {
+      setError("All fields are required.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Invalid email format.");
+      return;
+    }
+
+    setError(""); // Clear any previous errors
+
+    try {
+      const response = await fetch("http://localhost:3030/form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name, // lowercase to match backend expectations
+          message,
+          email,
+          subject,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log("Form submitted successfully:", responseData);
+        setSubmitted(true);
+        setName("");
+        setMessage("");
+        setEmail("");
+        setSubject("");
+      } else {
+        // Attempt to parse the response as JSON
+        try {
+          const responseData = await response.json();
+          setError(responseData.error || "There was an error submitting the form.");
+        } catch (err) {
+          setError("There was an error submitting the form.");
+        }
+      }
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+      setError("There was an error submitting the form.");
+    }
   };
 
   return (
@@ -39,9 +75,8 @@ const ContactForm = () => {
             type="text"
             id="name"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div>
@@ -50,9 +85,8 @@ const ContactForm = () => {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
@@ -61,9 +95,8 @@ const ContactForm = () => {
             type="text"
             id="subject"
             name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            required
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
           />
         </div>
         <div>
@@ -71,12 +104,13 @@ const ContactForm = () => {
           <textarea
             id="message"
             name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
         </div>
         <button type="submit">Submit</button>
+      {error && <p style={{ backgroundColor: "black", color: "red" }}>{error}</p>}
+      {submitted && <p className="success-message" style={{ backgroundColor: '#4caf51', color: 'white', display: 'flex',justifyContent: 'center', margin: '2%', width: '50%', marginLeft: '25%' }}>Form submitted successfully!</p>}
       </form>
     </div>
   );
