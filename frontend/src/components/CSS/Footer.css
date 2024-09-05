@@ -1,2 +1,33 @@
+.box{
+  background-color: #fffdf5;
+  padding-top: 40px;
+  padding-left: 40px;
+}
 
+.box-list ul{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  padding-right: 350px;
+}
 
+.box-list p{
+  font-weight: 600;
+  margin-top: 35px;
+  
+}
+
+.quick-links{
+  font-weight: bold;
+}
+
+.link{
+  text-decoration: underline;
+}
+
+.logo{
+  height: 100px;
+  float: right;
+  position: relative;
+  bottom: 180px;
+  margin-right: 100px;
+}

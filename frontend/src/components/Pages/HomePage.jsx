@@ -79,7 +79,7 @@ const HomePage = () => {
             schools tailored to fit your needs.
           </p>
           <button className="start-button">Create Profile</button>
-          <button className="start-button">Take Quiz</button>
+          <button className="start-button">Career Generator</button>
         </div>
 
 </div>
