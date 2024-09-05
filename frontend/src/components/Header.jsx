@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Menu, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { SearchOutlined } from '@ant-design/icons';
+import logo from "./images/op-logo.png"
 
 const { Header } = Layout;
 
@@ -19,8 +20,8 @@ const Slider = () => {
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" 
       }}
     >
-      <div className="logo" style={{ display: "flex", alignItems: "center" }}>
-        <img src="/path/to/your/logo.png" alt="Logo" style={{ height: "40px" }} />
+      <div className="logo" style={{ display: "flex", float: "left" }}>
+        <img src={logo} alt="Logo" style={{ height: "40px" }} />
       </div>
       
       <Menu
