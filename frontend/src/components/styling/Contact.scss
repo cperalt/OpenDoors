@@ -5,23 +5,23 @@
 }
 
 .contact-page{
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    background-color: pink;
+    background: url('../images/background.svg');
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-// Container for the entire form
+
 
 form {
     width: 30rem;
     margin: 50px;
     padding: 40px;
     background-color: #fffdf5;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 16px 14px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-family: 'Arial', sans-serif;
   }
@@ -69,7 +69,7 @@ form {
   
   // Button styling
   button[type='submit'] {
-    background: linear-gradient(#ffb8b8, #dac2ff);
+    background-color: #ff9800;
     color: #000;
     padding: 12px 24px;
     border: none;

@@ -1,99 +1,102 @@
-import React, { useEffect } from "react";
-import { Layout, Menu } from "antd";
+import React from "react";
+import { Layout, Menu, Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import { SearchOutlined } from '@ant-design/icons';
 
 const { Header } = Layout;
 
 const Slider = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-
-  const { getIdTokenClaims } = useAuth0();
-
-  const fetchToken = async () => {
-    try {
-      const claims = await getIdTokenClaims();
-      const idToken = claims.__raw; // This is the actual ID token
-
-      console.log('ID Token:', idToken);
-
-      // Pass this token to your backend
-      // Example:
-      // await fetch('/api/your-backend-endpoint', {
-      //   method: 'POST',
-      //   headers: {
-      //     Authorization: `Bearer ${idToken}`,
-      //   },
-      // });
-    } catch (error) {
-      console.error('Error fetching ID token:', error);
-    }
-  };
-
-  useEffect(() => {
-    console.log("Auth state changed:", { isAuthenticated, user });
-  }, [isAuthenticated, user]);
-
-
-
-
-  const handleAuthAction = () => {
-    if (isAuthenticated) {
-      logout({ returnTo: window.location.origin });
-    } else {
-      loginWithRedirect();
-    }
-  };
-
-  const menuItems = [
-    {
-      key: "1",
-      label: "Home",
-      onClick: () => navigate("/"),
-    },
-    {
-      key: "2",
-      label: "Career Generator",
-      onClick: () => navigate("/CareerGenerator"),
-    },
-    {
-      key: "3",
-      label: "Contact",
-      onClick: () => navigate("/contact"),
-    },
-    {
-      key: "5",
-      label: isAuthenticated ? `Logout (${user?.name})` : "Login",
-      onClick: handleAuthAction,
-    },
-  ];
-
-
-  
 
   return (
     <Header
       style={{
         display: "flex",
         alignItems: "center",
+        justifyContent: "space-between",
+        padding: "0 20px",  
+        backgroundColor: "#fffdf5", 
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)" 
       }}
     >
-      <div className="demo-logo" />
+      <div className="logo" style={{ display: "flex", alignItems: "center" }}>
+        <img src="/path/to/your/logo.png" alt="Logo" style={{ height: "40px" }} />
+      </div>
+      
       <Menu
-        theme="dark"
+        theme="light"
         mode="horizontal"
-        defaultSelectedKeys={["2"]}
-        items={menuItems}
+        defaultSelectedKeys={["1"]}
         style={{
           flex: 1,
           minWidth: 0,
           display: "flex",
-          justifyContent: "flex-end",
+          justifyContent: "center",
+          fontSize: "16px",
+          backgroundColor: "#fffdf5"
         }}
+        items={[
+          {
+            key: "1",
+            label: "Home",
+            onClick: () => {
+              navigate("/");
+            },
+          },
+          {
+            key: "2",
+            label: "Career Generator",
+            onClick: () => {
+              navigate("/CareerGenerator");
+            },
+          },
+          {
+            key: "3",
+            label: "Contact Us",
+            onClick: () => {
+              navigate("/Contact");
+            },
+          },
+        ]}
       />
+
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Button
+          icon={<SearchOutlined />}
+          type="text"
+          style={{
+            marginRight: "16px",
+            fontSize: "18px",
+            color: "#004d40",
+            border: "none",
+          }}
+        />
+        <Button
+          type="default"
+          style={{
+            marginRight: "8px",
+            borderColor: "#003314",
+            color: "#004d40",
+            backgroundColor: "#fffdf5"
+          }}
+          onClick={() => navigate("/login")}
+        >
+          Log In
+        </Button>
+        <Button
+          type="primary"
+          style={{
+            backgroundColor: "#003314",
+            borderColor: "#003314",
+          }}
+          onClick={() => navigate("/signup")}
+        >
+          Sign Up
+        </Button>
+      </div>
     </Header>
   );
 };
 
 export default Slider;
+

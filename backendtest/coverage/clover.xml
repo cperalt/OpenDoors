@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1725405400435" clover="3.2.0">
+  <project timestamp="1725405400435" name="All files">
+    <metrics statements="32" coveredstatements="13" conditionals="15" coveredconditionals="0" methods="2" coveredmethods="1" elements="49" coveredelements="14" complexity="0" loc="32" ncloc="32" packages="1" files="2" classes="2"/>
+    <file name="anthropicClient.js" path="/Users/Bryandmr/Desktop/React/CapStoneProj/OpenDoors/backendtest/anthropicClient.js">
+      <metrics statements="25" coveredstatements="8" conditionals="13" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="7" count="2" type="stmt"/>
+      <line num="8" count="2" type="stmt"/>
+      <line num="87" count="0" type="stmt"/>
+      <line num="89" count="0" type="cond" truecount="0" falsecount="5"/>
+      <line num="90" count="0" type="stmt"/>
+      <line num="91" count="0" type="stmt"/>
+      <line num="94" count="0" type="stmt"/>
+      <line num="96" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="97" count="0" type="stmt"/>
+      <line num="98" count="0" type="stmt"/>
+      <line num="102" count="0" type="stmt"/>
+      <line num="103" count="0" type="stmt"/>
+      <line num="105" count="0" type="stmt"/>
+      <line num="106" count="0" type="stmt"/>
+      <line num="107" count="0" type="stmt"/>
+      <line num="110" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="111" count="0" type="stmt"/>
+      <line num="112" count="0" type="stmt"/>
+      <line num="115" count="0" type="stmt"/>
+      <line num="117" count="2" type="stmt"/>
+      <line num="118" count="2" type="stmt"/>
+      <line num="122" count="1" type="stmt"/>
+    </file>
+    <file name="db.js" path="/Users/Bryandmr/Desktop/React/CapStoneProj/OpenDoors/backendtest/db.js">
+      <metrics statements="7" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

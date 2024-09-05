@@ -1,43 +1,125 @@
 .career-generator-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .career-generator-container h1 {
+  text-align: center;
   margin-bottom: 20px;
-  color: #333;
 }
 
-.career-generator-container input {
-  margin: 10px 0;
+.career-generator-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.career-generator-container .form-control,
+.career-generator-container input[type="text"],
+.career-generator-container select {
+  width: 100%;
   padding: 10px;
-  width: 80%;
-  max-width: 400px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 .career-generator-container button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.career-generator-container button:hover {
-  background-color: #0056b3;
+.career-generator-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.career-generator-container p {
+.career-generator-container button:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.career-generator-container .career-result {
   margin-top: 20px;
-  color: #555;
-  font-size: 1.2em;
+}
+
+.career-generator-container .career-result h1,
+.career-generator-container .career-result h2,
+.career-generator-container .career-result h3 {
+  margin-top: 20px;
+}
+
+.career-generator-container .career-result ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.career-generator-container .career-result ul ul {
+  list-style-type: circle;
+}
+
+.career-generator-container .career-result a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.career-generator-container .career-result a:hover {
+  text-decoration: underline;
+}
+.side-by-side {
+  display: flex;
+  flex: 1;
+}
+
+.dashboard {
+  max-width: fit-content;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.side-by-side > * {
+  flex: 1;
+}
+
+.career-generator {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+@media (max-width: 600px) {
+  .career-generator-container {
+    padding: 10px;
+  }
+
+  .career-generator-container .form-control,
+  .career-generator-container input[type="text"],
+  .career-generator-container select {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .career-generator-container button {
+    padding: 8px;
+    font-size: 14px;
+  }
 }

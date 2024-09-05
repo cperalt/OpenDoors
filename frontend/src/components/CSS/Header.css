@@ -1,0 +1,33 @@
+
+
+/* Override the default menu item styling */
+.ant-menu-item {
+    margin: 0 20px;
+    color: #333333;
+  }
+  
+  .ant-menu-item:hover {
+    color: #ff9800;
+    border-bottom: 2px solid #ff9800 !important;
+  }
+  
+  .ant-menu-item-selected {
+    color: #ff9800;
+    border-bottom: 2px solid #ff9800;
+  }
+
+  .ant-menu-item-selected:hover{
+    color: #003314;
+    border-bottom: 2px solid #003314;
+  }
+  
+  /* Customize buttons */
+  .ant-btn {
+    border-radius: 20px;
+  }
+  
+  .ant-btn-primary {
+    background-color: #003314;
+    border-color: #003314;
+  }
+  
