@@ -1,19 +1,15 @@
-import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import './CSS/ButtonStyles.css'
-
-
-
 
 const LogoutButton = () => {
-    const { logout } = useAuth0();
-  
-    return (
-      <button onClick={() => logout({ returnTo: window.location.origin })}>
-        Log Out
-      </button>
-    );
-  };
+    const { logout, isAuthenticated } = useAuth0();
 
-  
-  export default LogoutButton;
+    return (
+        isAuthenticated && (
+            <button onClick={() => logout()}>
+                Sign Out
+            </button>
+        )
+    )
+}
+
+export default LogoutButton

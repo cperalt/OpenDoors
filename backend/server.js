@@ -1,35 +1,23 @@
 require('dotenv').config(); // Load environment variables
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const Anthropic = require('@anthropic-ai/sdk');
-const mysql = require('mysql');
+const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 3000;
+const mysql = require('mysql');
+const PORT = process.env.PORT || 3030;
 const { auth } = require('express-openid-connect');
 
-// Initialize Anthropic client
-const anthropicClient = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
-// Middleware
-app.use(bodyParser.json());
 
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: 'f9e8176571a07c94810df76cefdc5f47b1d75980a1a41fd2230288676dbe04d7',
-    baseURL: 'http://localhost:3000',
-    clientID: 'AnI7nw9nq3404W1Ul61rCbyaIp7DCEdk',
-    issuerBaseURL: 'https://dev-z406x3swdy8f8arq.us.auth0.com',
+
+
     
-    
-    };
 
-const { requiresAuth } = require('express-openid-connect');    
+// Middleware setup
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json()); // Though express.json() is enough in most cases, this is kept for compatibility.
 
-    // auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
 
 
 // const db = mysql.createConnection({
@@ -46,6 +34,15 @@ app.use(auth(config));
 // });
 
 
+const jwt = require('jsonwebtoken');
+
+const idToken = 'user_id_token_from_auth0';
+
+console.log(idToken )
+
+
+
+
 app.get('/logout', (req, res) => {
     res.oidc.logout({
       returnTo: 'http://localhost:3000', // Ensure this matches the allowed logout URL in Auth0
@@ -60,10 +57,13 @@ app.get('/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
   });
 
+const { requiresAuth } = require('express-openid-connect');
 
 app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
+
+
 
 app.post("/form", (req, res) => {
   const { name, subject, email, message } = req.body;
@@ -74,7 +74,7 @@ app.post("/form", (req, res) => {
   }
 
 
-  const query = `INSERT INTO Form (name, subject, email, message) VALUES (?, ?, ?, ?)`;
+  const query = `INSERT INTO Form (name, subject, email, message) VALUES (?, ?, ?, ?);`
   const values = [name, subject, email, message];
 
   db.query(query, values, (err, results) => {
@@ -88,12 +88,12 @@ app.post("/form", (req, res) => {
   });
 });
 
-// Endpoint to receive student input and generate a career pathway
-app.post('/submit-story', async (req, res) => {
-  const { highschoolyr, learningStyle, careerAspirations, institution, city } = req.body;
 
+// Initialize Anthropic client
+const anthropicClient = new Anthropic();
+// Anthropic API Call Function
+const generateCareerPathway = async (highschoolyr, learningStyle, careerAspirations, institution, city) => {
   try {
-    // Call to Anthropic AI service to generate career pathway
     const response = await anthropicClient.messages.create({
       model: 'claude-3-5-sonnet-20240620',
       max_tokens: 2000,
@@ -102,15 +102,20 @@ app.post('/submit-story', async (req, res) => {
           role: 'user',
           content: `
           You are a career advisor that will provide guidance for High School kids for their future careers. Only show 5 different pathways depending on their High School Year, and provide resources, such as links and scholarships, grants, loans, and career resources for each pathway.
-          Create a personalized career pathway for a ${highschoolyr.join(', ')} High School Student based on the following details:
-          Learning Styles: ${learningStyle.join(', ')}
-          Career Aspirations: ${careerAspirations.join(', ')}
-          Preferred education Institution: ${institution.join(', ')}
+
+          Create a personalized career pathway for a ${highschoolyr} High School Student based on the following details:
+
+          Learning Styles: ${learningStyle},
+
+          Career Aspirations: ${careerAspirations},
+
+          Preferred education Institution: ${institution},
+
           Explain the Job types that this path has to offer in their future career.
-          Also, make sure to show useful links catered to: ${city.join(', ')}
-          The output should be in the following format:
-          Career Pathway: [Career Pathway Description]
-          The JSON response should be in the following format:
+
+          Also, make sure to show useful links catered to: ${city}.
+
+          The answer should be in Json format
           {
             "careerPathway": {
               "title": "",
@@ -125,7 +130,7 @@ app.post('/submit-story', async (req, res) => {
                     ""
                   ]
                 },
-                // ... (other steps)
+                // ... (other steps omitted for brevity)
               ],
               "jobTypes": [
                 "",
@@ -144,60 +149,75 @@ app.post('/submit-story', async (req, res) => {
                   "name": "",
                   "url": ""
                 },
-                // ... (other resources)
+                // ... (other resources omitted for brevity)
               ],
               "scholarshipsAndGrants": [
                 {
                   "name": "",
                   "url": ""
                 },
-                // ... (other scholarships)
+                // ... (other scholarships omitted for brevity)
               ],
               "careerResources": [
                 {
                   "name": "",
                   "url": ""
                 },
-                // ... (other career resources)
+                // ... (other career resources omitted for brevity)
               ]
             }
-          }`
+          }
+          Respond ONLY with the json and nothing else
+          `
         }
       ]
     });
 
-    // Log the entire response to understand its structure
-    // console.log('Full AI Response:', JSON.stringify(response, null, 2));
+    console.log('Full API Response:', JSON.stringify(response, null, 2));
 
-    // Check the response structure and extract the content
-    if (response && response.data && Array.isArray(response.data.messages)) {
-      const lastMessage = response.data.messages[response.data.messages.length - 1];
-
-      if (lastMessage && lastMessage.content) {
-        const careerPathwayString = lastMessage.content;
-
-        // Log the AI content response
-        // console.log('AI Response Content:', careerPathwayString);
-
-        // Attempt to parse the JSON response
-        try {
-          const parsedResponse = JSON.parse(careerPathwayString);
-          res.json(parsedResponse);
-        } catch (parseError) {
-          console.error('Error parsing AI response:', parseError);
-          res.status(500).json({ error: 'Failed to parse AI response', details: careerPathwayString });
-        }
-      } else {
-        console.error('No content found in the last message:', lastMessage);
-        res.status(500).json({ error: 'No content found in the AI response.', details: lastMessage });
-      }
-    } else {
-      console.error('Unexpected response format from AI service:', response);
-      res.status(500).json({ error: 'Unexpected response format from AI service.', details: response });
+    if (!response || !response.content || !Array.isArray(response.content)) {
+      console.error('Unexpected response structure:', response);
+      throw new Error('Unexpected response structure from AI service');
     }
+
+    const lastMessage = response.content[response.content.length - 1];
+
+    if (!lastMessage || typeof lastMessage.text !== 'string') {
+      console.error('No valid content in the last message:', lastMessage);
+      throw new Error('No valid content found in the AI response');
+    }
+
+    let parsedResponse;
+    try {
+      parsedResponse = JSON.parse(lastMessage.text);
+    } catch (parseError) {
+      console.error('Error parsing AI response:', parseError);
+      console.log('Raw response content:', lastMessage.text);
+      throw new Error('Failed to parse AI response as JSON');
+    }
+
+    if (!parsedResponse.careerPathway || !parsedResponse.resources) {
+      console.error('Parsed response is missing expected fields:', parsedResponse);
+      throw new Error('AI response is missing expected data structure');
+    }
+
+    return parsedResponse;
   } catch (error) {
     console.error('Error generating career pathway:', error.message);
-    res.status(500).json({ error: 'Failed to generate career pathway', details: error.message });
+    throw new Error(`Failed to generate career pathway: ${error.message}`);
+  }
+};
+
+// API Endpoint to receive student input and generate a career pathway
+app.post('/submit-story', async (req, res) => {
+  const { highschoolyr, learningStyle, careerAspirations, institution, city } = req.body;
+
+  try {
+    const careerPathwayData = await generateCareerPathway(highschoolyr, learningStyle, careerAspirations, institution, city);
+    res.json(careerPathwayData);
+  } catch (error) {
+    console.error('Error handling /submit-story request:', error.message);
+    res.status(500).json({ error: `Failed to generate career pathway. ${error.message}` });
   }
 });
 
