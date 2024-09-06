@@ -8,11 +8,45 @@ const { Header } = Layout;
 
 const Slider = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user, getAccessTokenSilently } = useAuth0();
+
 
   useEffect(() => {
-    console.log("Auth state changed:", { isAuthenticated, user });
-  }, [isAuthenticated, user]);
+    if (isAuthenticated) {
+      // Fetch the token when user is authenticated
+      const getTokenAndSendToBackend = async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          console.log("JWT Token:", token); // Debugging purpose
+
+          // Send token to backend to store in database
+          sendTokenToBackend(token);
+        } catch (error) {
+          console.error("Error fetching token:", error);
+        }
+      };
+
+      getTokenAndSendToBackend();
+    }
+  }, [isAuthenticated, getAccessTokenSilently]);
+
+  const sendTokenToBackend = async (token) => {
+    try {
+      await fetch("http://localhost:3030/api/save-token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+      console.log("Token sent to backend successfully");
+    } catch (error) {
+      console.error("Error sending token to backend:", error);
+    }
+  };
+
+
+
 
   const handleAuthAction = () => {
     if (isAuthenticated) {
