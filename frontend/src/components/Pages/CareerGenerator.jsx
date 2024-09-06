@@ -157,7 +157,7 @@ const CareerGenerator = () => {
           <p>{career.careerPathway.description}</p>
           <div className="divider-results">
             <h2>Steps</h2>
-            <ul>
+            <ol>
               {career.careerPathway.steps.map((step, index) => (
                 <li key={index}>
                   <h3>{step.stage}</h3>
@@ -168,7 +168,7 @@ const CareerGenerator = () => {
                   </ul>
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
           <div className="divider-results">
             <h2>Job Types</h2>

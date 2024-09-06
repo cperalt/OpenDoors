@@ -1,5 +1,4 @@
-
-import '../CSS/Dashboard.css'
+import "../CSS/Dashboard.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,6 +8,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import { Button, Layout, Menu, theme, ConfigProvider } from "antd";
 import { Button, Layout, Menu, theme, ConfigProvider } from "antd";
 const { Header, Sider } = Layout;
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#003314", 
+          colorPrimary: "#003314",
         },
       }}
     >
@@ -30,7 +30,7 @@ const App = () => {
           <Header
             style={{
               padding: 0,
-              backgroundColor: "#FF9800", 
+              backgroundColor: "#FF9800",
             }}
           >
             <Button
@@ -41,7 +41,7 @@ const App = () => {
                 fontSize: "16px",
                 width: "100%",
                 height: 64,
-                backgroundColor: "#003314", 
+                backgroundColor: "#003314",
               }}
             />
           </Header>
