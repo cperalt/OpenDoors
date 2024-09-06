@@ -34,7 +34,6 @@ const App = () => {
               height: 64,
             }}
           />
-          IMAGE GOES HERE FOR LOGO
         </Header>
         <div className="demo-logo-vertical" />
         <Menu
@@ -42,9 +41,9 @@ const App = () => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           style={{
-            backgroundColor: "#FF9800"
+            backgroundColor: "#FF9800",
           }}
-          onClick={({ key }) => navigate(key)}\
+          onClick={({ key }) => navigate(key)}
           items={[
             {
               key: "/dashboard-profile",
