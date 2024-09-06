@@ -7,19 +7,12 @@ const app = express();
 const mysql = require('mysql');
 const PORT = process.env.PORT || 3030;
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(cors({
-    origin: 'http://localhost:3000'  // or whatever port your frontend uses
-  }));
-}
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(cors({
-    origin: 'https://open-doors-frontend.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }));
-}
+
+app.use(cors({
+  origin: '*', // Allow any origin
+}));
+
 
 app.use(express.json());
 app.use(bodyParser.json()); // Though express.json() is enough in most cases, this is kept for compatibility.
