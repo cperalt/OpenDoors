@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/CareerGenerator.css";
+import background2 from '../images/career-background.svg'
 
 const CareerGenerator = () => {
   const [highschoolyr, setHighschoolyr] = useState("");
@@ -68,8 +69,9 @@ const CareerGenerator = () => {
     }
   }, [career]);
 
-  return (
-    <div className="career-generator-container">
+  return(
+    <div className="generator">
+      <div className="career-generator-container">
       <h1>Career Generator</h1>
       <label>Highschool Year</label>
       <select
@@ -236,6 +238,7 @@ const CareerGenerator = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

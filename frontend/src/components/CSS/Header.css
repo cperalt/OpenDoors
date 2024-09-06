@@ -24,6 +24,8 @@
   /* Customize buttons */
   .ant-btn {
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
   }
   
   .ant-btn-primary {

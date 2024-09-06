@@ -1,9 +1,14 @@
+.generator{
+  background: url('../images/career-background.svg');
+  background-size: cover;
+}
+
 /* Base styles */
 .career-generator-container {
   max-width: 800px;
   margin: 5% auto;
   padding: 30px;
-  background-color: #ffffff;
+  background-color: #fffdf5;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   font-family: "Arial", sans-serif;
@@ -48,6 +53,7 @@
   padding: 12px;
   margin-bottom: 20px;
   border: 2px solid #bdc3c7;
+  background-color: #fffdf5;
   border-radius: 6px;
   font-size: 16px;
   transition: border-color 0.3s ease;
@@ -65,7 +71,7 @@
   display: block;
   width: 100%;
   padding: 12px;
-  background-color: #3498db;
+  background-color: #ff9800;
   color: white;
   border: none;
   border-radius: 6px;
@@ -85,7 +91,7 @@
 
 /* Results section */
 .result-container {
-  background-color: #f8f9fa;
+  background-color: #fffdf5;
   border-radius: 8px;
   padding: 20px;
   margin-top: 30px;
