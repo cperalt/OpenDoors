@@ -41,7 +41,10 @@ const App = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          onClick={({ key }) => navigate(key)}
+          style={{
+            backgroundColor: "#FF9800"
+          }}
+          onClick={({ key }) => navigate(key)}\
           items={[
             {
               key: "/dashboard-profile",

@@ -20,12 +20,7 @@ const HomePage = () => {
 
           <div className="hero-text">
             <h1>Find a pathway that fits you the best!</h1>
-            <p>
-              Finding the right career path shouldn’t be overwhelming. From
-              exploring different industries to connecting with mentors and
-              resources, we make it simple to discover the best pathway for your
-              future success.
-            </p>
+            <p>Finding the right career path shouldn’t be overwhelming. From exploring different industries to connecting with mentors and resources, we make it simple to discover the best pathway for your future success.</p>
           </div>
       </div>
 
@@ -77,10 +72,11 @@ const HomePage = () => {
           <p>
             Tell us what matters most to you and we'll create a custom list of
             schools tailored to fit your needs.
-          </p>
+          </p>    
           <button className="start-button">Create Profile</button>
-          <button className="start-button">Career Generator</button>
-        </div>
+  <button className="start-button">Career Generator</button> 
+  </div>
+ 
 
 </div>
 

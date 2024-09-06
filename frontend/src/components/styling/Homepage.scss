@@ -1,6 +1,7 @@
 .homepage {
     
- 
+ margin: 0;
+ padding:0;
 
     .hero-section {
       display: flex;
@@ -10,30 +11,38 @@
       background-color: #003314;
       height: 25rem;
       
-      
+      .hero-text{
+        display: block;
+        padding-left: 100px;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-right: 100px;
 
-      h1{
+        h1{
         font-size: 30px;
         font-weight: bold;
         display: flex;
         align-items: center;
         justify-content: flex-end; 
-        padding-left: 100px;
+        padding-left: 650px;
         text-align: center;
         margin-bottom: 20px;
-        margin-right: 100px;
-      }
+        margin-right: 30px;
+        }
 
-      p{
-        font-size: large;
+        p{
+          font-size: large;
         display: flex;
         align-items: center;
-        justify-content: flex-end; 
-        margin-left: 48rem;
-        margin-right: 50px;
+        justify-content: center; 
         text-align: center;
+        margin-left: 42rem;
+        margin-right: 20px;
         margin-bottom: 100px;
+        }
       }
+
+      
 
       .hero-image {
         width: 70%;
@@ -62,7 +71,6 @@
     .features-section {
       padding-top: 60px;
       padding-bottom: 40px;
-      margin-bottom: 50px;
       text-align: center;
       background-color: #fffdf5;
       
@@ -105,7 +113,7 @@
         display: flex;
         justify-content: center;
         text-align: center;
-        margin-top: 35px;
+        margin-top: 55px;
       }
 
       .stars{
@@ -116,6 +124,7 @@
   
       .quiz-text {
         width: 50%;
+        
         text-align: center;
         font-size: 20px;
 
@@ -137,7 +146,345 @@
         border-radius: 5px;
       }
     }
+
+  @media only screen and (max-width: 1024px){
+    .hero-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      background-color: #003314;
+      height: 25rem;
+      
+      .hero-text{
+        display: block;
+        padding-left: 100px;
+        text-align: center;
+        margin-bottom: 20px;
+        // margin-right: 100px;
+
+        h1{
+        font-size: 30px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; 
+        padding-left: 480px;
+        text-align: center;
+        margin-bottom: 20px;
+        // margin-right: 30px;
+        }
+
+        p{
+          font-size: large;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        text-align: center;
+        margin-left: 31rem;
+        // margin-right: 20px;
+        margin-bottom: 100px;
+        }
+      }
+
+      .hero-image {
+        width: 70%;
+        height: 25rem;
+        position: absolute;
+    }
+
+  }
+
+    .divider{
+
+      .divider{
+        position: absolute;
+        top: 300px;
+        width: 1450px;
+      }
+
+      .divider2{
+        position: absolute;
+        top: 800px;
+        width: 1450px;
+      }
+    }
   
+  
+    .features-section {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      text-align: center;
+      background-color: #fffdf5;
+      
+      h1{
+        font-size: 30px;
+        font-weight: bold;
+      }
+
+      .features {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 30px;
+  
+        .feature-item {
+          .feature-image {
+            height: 100px;
+            width: 100px;
+            margin: auto;
+          }
+  
+          h3 {
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  
+    .orange {
+      height: 35rem;
+      padding-bottom: 75px;
+      background-color: #ff9800;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .phone-image {
+        width: 50%;
+        height: 400px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin-top: 55px;
+      }
+
+      .stars{
+        position: absolute;
+        margin-left: 30rem;
+        margin-top: 100px;
+        height: 400px;
+      }
+  
+      .quiz-text {
+        width: 50%;
+        text-align: center;
+        font-size: 20px;
+
+        h1{
+          font-size: 30px;
+          font-weight: bold;
+        }
+
+        p{
+          padding-right: 20px;
+        }
+      }
+    
+      .start-button{
+        background-color: #003314;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 20px;
+        margin-right: 20px;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px){
+
+    .hero-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      background-color: #003314;
+      height: 20rem;
+      
+      .hero-text{
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+
+        h1{
+        font-size: 14px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end; 
+        padding-left: 270px;
+        text-align: center;
+        margin-bottom: 10px;
+        }
+
+        p{
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        text-align: center;
+        margin-left: 21rem;
+        margin-bottom: 100px;
+        }
+      }
+
+      .hero-image {
+        width: 70%;
+        height: 20rem;
+        position: absolute;
+    }
+
+  }
+    
+    .divider{
+      position: absolute;
+      top: -100px;
+      width: 1450px;
+    }
+
+    .orange{
+      p{
+        padding-right: 20px;
+      }
+      .stars{
+        display: none;
+      }
+    }
+  
+  }
+  
+    @media only screen and (max-width: 425px){
+
+      .hero-section {
+        display: flex;
+        color: white;
+        background-color: #003314;
+        height: 25rem;
+            
+        .hero-text{
+          display: block;
+          padding-left: 100px;
+          text-align: center;
+          margin-bottom: 20px;
+          margin-right: 100px;
+      
+            h1{
+              font-size: 30px;
+              font-weight: bold;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end; 
+              // padding-left: 650px;
+              text-align: center;
+              // margin-bottom: 20px;
+              // margin-right: 30px;
+            }
+      
+            p{
+              font-size: large;
+              display: flex;
+              align-items: center;
+              justify-content: center; 
+              text-align: center;
+              // margin-left: 42rem;
+              // margin-right: 20px;
+              // margin-bottom: 100px;
+            }
+      }
+       
+      .hero-image {
+        display: none;
+      }
+       
+    }
+       
+           .divider{
+       
+             .divider{
+               position: absolute;
+               top: 400px;
+               width: 100%;
+             }
+       
+             .divider2{
+               position: absolute;
+               top: 940px;
+               width: 100%;
+             }
+           }
+         
+         
+           .features-section {
+             text-align: center;
+             background-color: #fffdf5;
+             
+             h1{
+               font-size: 30px;
+               font-weight: bold;
+             }
+       
+             .features {
+               display: flex;
+               justify-content: space-around;
+               margin-top: 30px;
+         
+               .feature-item {
+                 .feature-image {
+                   height: 80px;
+                   width: 80px;
+                   margin: auto;
+                 }
+         
+                 h3 {
+                   margin-top: 10px;
+                 }
+               }
+             }
+           }
+         
+           .orange {
+             height: 25rem;
+             background-color: #ff9800;
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+
+         
+             .phone-image {
+               display: none;
+             }
+       
+             .stars{
+               display: none;
+             }
+         
+             .quiz-text {
+               width: 98%;
+               text-align: center;
+               font-size: 20px;
+               margin-top: 80px;
+
+               h1{
+                 font-size: 30px;
+                 font-weight: bold;
+               }
+             }
+             
+           
+             
+             .start-button button{
+              font-size: 13px;
+              display: flex;
+              flex-direction: column; 
+              align-items: center;
+              
+             }
+           
+    }    
+  }
     
 }
     
