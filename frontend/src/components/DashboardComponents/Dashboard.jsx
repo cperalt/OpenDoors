@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import CareerGenerator from "../Pages/CareerGenerator";
-import Login from "../Pages/Login";
-import Homepage from "../Pages/HomePage";
+import { useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,12 +8,13 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-const { Header, Sider, Content } = Layout;
+const { Header, Sider } = Layout;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { colorBgContainer },
   } = theme.useToken();
+  const navigate = useNavigate();
   return (
     <Layout style={{ maxWidth: "fit-content" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -31,7 +30,7 @@ const App = () => {
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
-              width: 64,
+              width: "100%",
               height: 64,
             }}
           />
@@ -45,19 +44,20 @@ const App = () => {
           style={{
             backgroundColor: "#FF9800"
           }}
+          onClick={({ key }) => navigate(key)}\
           items={[
             {
-              key: "1",
+              key: "/dashboard-profile",
               icon: <UserOutlined />,
               label: "Profile",
             },
             {
-              key: "2",
+              key: "/dashboard-history",
               icon: <VideoCameraOutlined />,
               label: "History",
             },
             {
-              key: "3",
+              key: "/dashboard-settings",
               icon: <UploadOutlined />,
               label: "Settings",
             },
