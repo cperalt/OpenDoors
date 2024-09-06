@@ -7,9 +7,20 @@ const app = express();
 const mysql = require('mysql');
 const PORT = process.env.PORT || 3030;
 
-app.use(cors({
-  origin: 'https://open-doors-frontend.vercel.app'
-}));
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors({
+    origin: 'http://localhost:3000'  // or whatever port your frontend uses
+  }));
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(cors({
+    origin: 'https://open-doors-frontend.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+}
+
 app.use(express.json());
 app.use(bodyParser.json()); // Though express.json() is enough in most cases, this is kept for compatibility.
 
@@ -172,6 +183,19 @@ app.post("/form", (req, res) => {
 });
 
 
+// API Endpoint to receive student input and generate a career pathway
+app.post('/submit-story', async (req, res) => {
+  const { highschoolyr, learningStyle, careerAspirations, institution, city } = req.body;
+
+  try {
+    const careerPathwayData = await generateCareerPathway(highschoolyr, learningStyle, careerAspirations, institution, city);
+    res.json(careerPathwayData);
+  } catch (error) {
+    console.error('Error handling /submit-story request:', error.message);
+    res.status(500).json({ error: `Failed to generate career pathway. ${error.message}` });
+  }
+});
+
 // Initialize Anthropic client
 const anthropicClient = new Anthropic();
 // Anthropic API Call Function
@@ -299,19 +323,6 @@ const generateCareerPathway = async (highschoolyr, learningStyle, careerAspirati
     throw new Error(`Failed to generate career pathway: ${error.message}`);
   }
 };
-
-// API Endpoint to receive student input and generate a career pathway
-app.post('/submit-story', async (req, res) => {
-  const { highschoolyr, learningStyle, careerAspirations, institution, city } = req.body;
-
-  try {
-    const careerPathwayData = await generateCareerPathway(highschoolyr, learningStyle, careerAspirations, institution, city);
-    res.json(careerPathwayData);
-  } catch (error) {
-    console.error('Error handling /submit-story request:', error.message);
-    res.status(500).json({ error: `Failed to generate career pathway. ${error.message}` });
-  }
-});
 
 // Start the server
 app.listen(PORT, () => {
