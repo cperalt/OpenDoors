@@ -21,11 +21,133 @@ const db = mysql.createConnection({
   port: process.env.DB_PORT
 });
 
+
+
 db.connect(function (err) {
   if (err) throw err;
   console.log('Connected to database!');
 });
 
+
+
+// Endpoint to save token
+app.post('/api/save-token', (req, res) => {
+    console.log("POST /api/save-token triggered");
+    const { token } = req.body;
+
+    if (!token) {
+        return res.status(400).json({ error: "Token is missing" });
+      }
+  
+    // Insert the token into the database
+    const query = 'INSERT INTO user_tokens (token) VALUES (?)';
+    db.query(query, [token], (err, result) => {
+      if (err) {
+        console.error("Error saving token to database:", err);
+        return res.status(500).json({ message: "Database error" });
+      }
+      return res.status(200).json({ message: "Token saved successfully" });
+    });
+  });
+
+  app.post('/api/save-roadmap', async (req, res) => {
+    const { roadmap } = req.body; // The roadmap data from the frontend
+    const userToken = req.headers.authorization.split(' ')[1];  // Extract the token from the Authorization header
+  
+    if (!roadmap || !userToken) {
+      return res.status(400).json({ message: "Invalid request data" });
+    }
+  
+    try {
+      const connection = await mysql.createConnection(dbConfig);
+  
+      // Get the user ID based on the token
+      const [userRows] = await connection.execute('SELECT id FROM user_tokens WHERE token = ?', [userToken]);
+      if (userRows.length === 0) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const userId = userRows[0].id;
+  
+      // Insert Pathway
+      const { title, description, steps, jobTypes } = roadmap.careerPathway;
+      const [pathwayResult] = await connection.execute('INSERT INTO Pathways (pathway_name) VALUES (?)', [title]);
+      const pathwayId = pathwayResult.insertId;
+  
+      // Insert Steps
+      for (let i = 0; i < steps.length; i++) {
+        const { stage, activities } = steps[i];
+        const stepDescription = activities.join(', '); // Join activities as a single description
+        await connection.execute(
+          'INSERT INTO Steps (pathway_id, step_name, step_description, step_order) VALUES (?, ?, ?, ?)', 
+          [pathwayId, stage, stepDescription, i + 1]
+        );
+      }
+  
+      // Insert Job Types
+      for (let jobType of jobTypes) {
+        await connection.execute('INSERT INTO Job_Types (pathway_id, job_title) VALUES (?, ?)', [pathwayId, jobType]);
+      }
+  
+      // Insert Resources
+      const { educationalResources, scholarshipsAndGrants, careerResources, location } = roadmap.resources;
+  
+      for (let resource of educationalResources) {
+        await connection.execute(
+          'INSERT INTO Resources (pathway_id, resource_type, resource_name, resource_link, location) VALUES (?, ?, ?, ?, ?)', 
+          [pathwayId, 'Educational', resource.name, resource.url, location]
+        );
+      }
+  
+      for (let scholarship of scholarshipsAndGrants) {
+        await connection.execute(
+          'INSERT INTO Resources (pathway_id, resource_type, resource_name, resource_link, location) VALUES (?, ?, ?, ?, ?)', 
+          [pathwayId, 'Educational', scholarship.name, scholarship.url, location]
+        );
+      }
+  
+      for (let careerResource of careerResources) {
+        await connection.execute(
+          'INSERT INTO Resources (pathway_id, resource_type, resource_name, resource_link, location) VALUES (?, ?, ?, ?, ?)', 
+          [pathwayId, 'Career', careerResource.name, careerResource.url, location]
+        );
+      }
+  
+      // Insert into User_Roadmaps to save the user's roadmap
+      await connection.execute(
+        'INSERT INTO User_Roadmaps (user_id, pathway_id) VALUES (?, ?)',
+        [userId, pathwayId]
+      );
+  
+      res.status(200).json({ message: 'Roadmap saved successfully' });
+  
+    } catch (error) {
+      console.error('Error saving roadmap:', error);
+      res.status(500).json({ message: 'Failed to save roadmap' });
+    }
+  });
+
+app.get('/user/roadmaps', async (req, res) => {
+    try {
+      const userToken = req.headers.authorization.split(' ')[1];  // Extract the token from the Authorization header
+      const connection = await mysql.createConnection({ /* MySQL connection details */ });
+  
+      // Query to fetch all saved roadmaps for the user
+      const [roadmaps] = await connection.execute(`
+        SELECT p.pathway_name, ur.roadmap_id
+        FROM User_Roadmaps ur
+        JOIN user_tokens ut ON ur.user_id = ut.id
+        JOIN Pathways p ON ur.pathway_id = p.pathway_id
+        WHERE ut.token = ?;
+      `, [userToken]);
+  
+      res.json({ roadmaps });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });  
+
+  
 app.post("/form", (req, res) => {
   const { name, subject, email, message } = req.body;
 
