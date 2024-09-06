@@ -104,13 +104,15 @@ const Slider = () => {
         items={menuItems}
       />
 
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Button
           type="primary"
           onClick={handleAuthAction}
           style={{
             backgroundColor: "#003314",
             borderColor: "#003314",
+            display: "flex",
+            textAlign: "center"
           }}
         >
           {isAuthenticated ? `Logout (${user?.name})` : "Login"}
