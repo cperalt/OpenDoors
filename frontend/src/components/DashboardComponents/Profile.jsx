@@ -45,7 +45,7 @@ export default function ProfilePage() {
           <label htmlFor="bio">Bio: {profileData.bio}</label>
         </div>
         <div>
-          <button type="submit">Delete</button>
+          <button type="submit">Edit</button>
         </div>
       </form>
     </div>

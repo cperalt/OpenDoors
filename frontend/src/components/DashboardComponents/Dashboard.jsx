@@ -30,7 +30,7 @@ const App = () => {
             onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: "16px",
-              width: 64,
+              width: "100%",
               height: 64,
             }}
           />

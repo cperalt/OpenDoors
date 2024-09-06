@@ -14,63 +14,63 @@ export default function App() {
     <div>
       <Router>
         <Header />
-        <div className="content-container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route
-              path="/careergenerator"
-              element={
-                <div className="side-by-side">
-                  <Dashboard className="dashboard" />
-                  <CareerGenerator />
-                </div>
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <div className="side-by-side">
-                  <Dashboard className="dashboard" />
-                </div>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <div className="side-by-side">
-                  <Contact />
-                </div>
-              }
-            />
-            <Route
-              path="/dashboard-profile"
-              element={
-                <div className="side-by-side">
-                  <Dashboard className="dashboard" />
-                  <Profile />
-                </div>
-              }
-            />
-            <Route
-              path="/dashboard-history"
-              element={
-                <div className="side-by-side">
-                  <Dashboard className="dashboard" />
-                  <History />
-                </div>
-              }
-            />
-            <Route
-              path="/dashboard-settings"
-              element={
-                <div className="side-by-side">
-                  <Dashboard className="dashboard" />
-                  <Settings />
-                </div>
-              }
-            />
-          </Routes>
-        </div>
+        {/* <div className="content-container"> */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/careergenerator"
+            element={
+              <div className="side-by-side">
+                <Dashboard className="dashboard" />
+                <CareerGenerator />
+              </div>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <div className="side-by-side">
+                <Dashboard className="dashboard" />
+              </div>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <div className="side-by-side">
+                <Contact />
+              </div>
+            }
+          />
+          <Route
+            path="/dashboard-profile"
+            element={
+              <div className="side-by-side">
+                <Dashboard className="dashboard" />
+                <Profile />
+              </div>
+            }
+          />
+          <Route
+            path="/dashboard-history"
+            element={
+              <div className="side-by-side">
+                <Dashboard className="dashboard" />
+                <History />
+              </div>
+            }
+          />
+          <Route
+            path="/dashboard-settings"
+            element={
+              <div className="side-by-side">
+                <Dashboard className="dashboard" />
+                <Settings />
+              </div>
+            }
+          />
+        </Routes>
+        {/* </div> */}
         <Footer />
       </Router>
     </div>
