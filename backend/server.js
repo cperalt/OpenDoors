@@ -13,9 +13,13 @@ app.use(bodyParser.json()); // Though express.json() is enough in most cases, th
 
 app.use(cors()); // Enable CORS
 
-app.use(cors({
-  origin: '*', // Allow any origin
-}));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
+  next();
+});
+
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
