@@ -2,14 +2,14 @@ require('dotenv').config(); // Load environment variables
 const express = require('express');
 const bodyParser = require('body-parser');
 const Anthropic = require('@anthropic-ai/sdk');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 const mysql = require('mysql');
 const PORT = process.env.PORT || 3030;
 
 
 // Middleware setup
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json()); // Though express.json() is enough in most cases, this is kept for compatibility.
 
