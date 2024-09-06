@@ -42,6 +42,9 @@ const App = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          style={{
+            backgroundColor: "#FF9800"
+          }}
           items={[
             {
               key: "1",
