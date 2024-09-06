@@ -30,7 +30,7 @@ export default function Footer() {
         </ul>
         <p>Copyright © 2024 All Rights Reserved.</p>
       </div>
-    <img src={logo} alt="logo" className="logo"></img>
+    
     </footer>
   );
 };
