@@ -32,7 +32,7 @@ const CareerGenerator = () => {
 
     setIsGenerating(true);
     try {
-      const response = await fetch("http://localhost:3030/submit-story", {
+      const response = await fetch("https://open-doors-backend.vercel.app/submit-story", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
