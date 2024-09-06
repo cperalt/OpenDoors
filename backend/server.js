@@ -214,6 +214,7 @@ const generateCareerPathway = async (highschoolyr, learningStyle, careerAspirati
                   ]
                 },
                 // ... (other steps omitted for brevity)
+                (also enumerate the steps)
               ],
               "jobTypes": [
                 "",
